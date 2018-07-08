@@ -27,7 +27,18 @@ app.get('/todos', (req, res) => {
   }, (e) => {
     res.status(400);
   });
+});
+
+app.get('/todo/:id', (req, res) => {
+  let id = req.params.id;
+  Todo.findById(id, (err, todo) => {
+    if(err) {
+      res.status(404).send({error: 'Invalid Id'});
+    }
+    res.send({todo});
+  });
 })
+
 app.listen(3000, () => {
   console.log('App started in port 3000');
 });
