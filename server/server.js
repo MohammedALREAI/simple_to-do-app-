@@ -47,6 +47,21 @@ app.delete('/todo/:id', (req, res) => {
     }
     res.send({todo});
   });
+});
+
+app.patch('/todo/:id', (req, res) => {
+  let todo = {};
+  let id = req.params.id;
+  todo.text = req.body.text;
+  todo.completed = req.body.completed;
+  todo.completedAt = new Date().getTime();
+
+  Todo.findByIdAndUpdate(id, todo, (err) => {
+    if(err) {
+      res.status(400).send({error: 'Could not update'});
+    }
+    res.send({success: 'Todo updated succesfully'});
+  } )
 })
 
 app.listen(3000, () => {
