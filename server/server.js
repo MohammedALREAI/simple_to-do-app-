@@ -37,6 +37,16 @@ app.get('/todo/:id', (req, res) => {
     }
     res.send({todo});
   });
+});
+
+app.delete('/todo/:id', (req, res) => {
+  let id = req.params.id;
+  Todo.findByIdAndRemove(id, (err, todo) => {
+    if(err) {
+      res.status(404).send({error: 'Invalid Id'});
+    }
+    res.send({todo});
+  });
 })
 
 app.listen(3000, () => {
