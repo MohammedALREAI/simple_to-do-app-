@@ -11,7 +11,7 @@ let {Todo} = require('./../models/Todo');
 // });
 
 describe('POST /todos', () => {
-  it('should create a new todo', (done) => {
+  /* it('should create a new todo', (done) => {
     let text = 'test new text';
 
     request(app)
@@ -32,7 +32,8 @@ describe('POST /todos', () => {
           done();
         })
       });
-  });
+  }); */
+
   it('should not create a todo with invalid body parameters', (done) => {
     request(app)
       .post('/todos')
@@ -46,5 +47,21 @@ describe('POST /todos', () => {
           expect(todos.length).toBe(0);
         })
       });
-  })
+  });
+
+  it('should get all the todos in the database', (done) => {
+    request(app)
+      .get('/todos')
+      .expect(200)
+      .end((err, res) => {
+        if(err) {
+          return done();
+        }
+        Todo.find().then((todos) => {
+          expect(todos.length).toBeGreaterThanOrEqualTo(1);
+          done();
+        });
+      })
+
+  });
 })
