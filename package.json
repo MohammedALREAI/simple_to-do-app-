@@ -9,7 +9,7 @@
     "start":"nodemon --exec ./server/server.js "
 
   },
-  "keywords": ["node simple with mongodb"],
+  "keywords": ["node simple with mongodb","nodejs","mongoose" ],
   "author": "Mohammed alrai",
   "license": "ISC",
   "dependencies": {
